@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sut.persist.dao.UserDao">
+
+	<!-- 定义User实体 -->
+	<resultMap type="com.sut.persist.entity.User" id="userResult">
+		<id property="id" javaType="int" column="id" />
+		<result property="username" javaType="String" column="USERNAME" />
+		<result property="password" javaType="String" column="PASSWORD" />
+		<result property="enable" javaType="com.sut.util.meta.WhetherTypeEnum" column="enabled" 
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" />
+		<result property="createTime" javaType="java.util.Date" column="CREATE_TIME" />
+		<result property="lastLoginTime" javaType="java.util.Date" column="LAST_LOGIN_DATE" />
+		<result property="sex" javaType="com.sut.util.meta.SexTypeEnum" column="SEX" 
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" />
+		<result property="email" javaType="String" column="EMAIL" />
+		<result property="mobile" javaType="String" column="MOBILE" />
+		<result property="province" javaType="String" column="PROVINCE" />
+		<result property="city" javaType="String" column="CITY" />
+		<result property="area" javaType="String" column="AREA" />
+		<result property="address" javaType="String" column="ADDRESS" />
+		<result property="remark" javaType="String" column="REMARK" />
+	</resultMap>
+
+	<!-- query user by id -->
+	<select id="getById" parameterType="int"  resultMap="userResult">
+		select 
+		 *
+		from user where id = #{id}
+	</select>
+	
+	<!-- query user by name -->
+	<select id="getByName" parameterType="String" resultMap="userResult">
+		select 
+			id as id,
+			username as username,
+			password as password,
+			enabled as enable,
+			create_time as createTime,
+			last_login_date as lastLoginTime,
+			email as email,
+			mobile as mobile,
+			province as province,
+			city as city,
+			area as area,
+			address as address,
+			remark as remark
+		from user
+		where username = #{username}
+	</select>
+
+	<!-- query all user -->	
+	<select id="getAll" resultMap="userResult">
+		select 
+			id as id,
+			username as username,
+			password as password,
+			enabled as enable,
+			create_time as createTime,
+			last_login_date as lastLoginTime,
+			email as email,
+			mobile as mobile,
+			province as province,
+			city as city,
+			area as area,
+			address as address,
+			remark as remark
+		from user
+	</select>
+	
+	<!-- delete by id -->
+	<delete id="deleteById" parameterType="int">
+		delete from user where id = #{id}
+	</delete>
+	
+	<!-- insert User -->
+	<insert id="insert">
+		insert into user(
+			username,
+			password,
+			enabled,
+			create_time,
+			last_login_date,
+			sex,
+			email,
+			mobile,
+			province,
+			city,
+			area,
+			address,
+			remark
+		)values(
+			#{username},
+			#{password},
+			#{enable, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR,
+				 javaType=com.sut.util.meta.WhetherTypeEnum},
+			#{createTime},
+			#{lastLoginDate},
+			#{sex, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR, 
+				 javaType=com.sut.util.meta.SexTypeEnum},
+			#{email},
+			#{mobile},
+			#{province},
+			#{city},
+			#{area},
+			#{address},
+			#{remark}
+		)
+	</insert>
+</mapper>

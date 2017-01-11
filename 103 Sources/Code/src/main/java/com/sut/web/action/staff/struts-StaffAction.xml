@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="staff" namespace="/staff" extends="default">
+		<action name="addStaff" class="staffAction" method="addStaff">
+			<result name="success">/WEB-INF/pages/staff/staff_add.jsp</result>
+			<result name="input">/WEB-INF/pages/staff/staff_add.jsp</result>
+		</action>
+		
+		<action name="saveStaff" class="staffAction" method="saveStaff">
+			<result name="success">/WEB-INF/pages/staff/staff_add.jsp</result>
+			<result name="input">/WEB-INF/pages/staff/staff_add.jsp</result>
+		</action>
+		
+		<action name="viewStaff" class="staffAction" method="viewStaff">
+			<result name="success">/WEB-INF/pages/staff/staff_view.jsp</result>
+		</action>
+		
+		<action name="staffList" class="staffAction" method="staffList">
+			<result name="success">/WEB-INF/pages/staff/staff_list.jsp</result>
+		</action>
+		<!-- 增加员工评论 -->
+		<action name="addReview" class="staffAction" method="addReview">
+			<result name="success">/WEB-INF/pages/staff/staff_list.jsp</result>
+		</action>
+	</package>
+</struts>

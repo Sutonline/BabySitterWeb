@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="index" namespace="/index" extends="default">
+		<action name="index" class="indexAction" method="index">
+			<result name="success">/WEB-INF/pages/index/index.jsp</result>
+		</action>
+		
+		<!-- header action -->
+		<action name="header" class="indexAction" method="header">
+			<result name="success">/WEB-INF/pages/index/header.jsp</result>
+		</action>
+		
+		<!-- footer action -->
+		<action name="footer" class="indexAction" method="footer">
+			<result name="success">/WEB-INF/pages/index/footer.jsp</result>
+		</action>
+		
+		<!-- mainport action -->
+		<action name="mainport" class="indexAction" method="mainport">
+			<result name="success">/WEB-INF/pages/index/mainport.jsp</result>
+		</action>
+	</package>
+</struts>

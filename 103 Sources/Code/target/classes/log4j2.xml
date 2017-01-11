@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="30">
+	<Appenders>
+		<File name="A1" filename="D:/BabySitterLog/A1.log" append="false">
+			<PatternLayout pattern="%t %-5p %c{1} - %m%n"/>
+		</File>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d %-5p [%t] %c{1} - %m%n"/>		
+		</Console>
+		<Async name="ASYNC_File">
+			<AppenderRef ref="A1" />
+		</Async>
+		<Async name="ASYNC_STDOUT">
+			<AppenderRef ref="STDOUT"/>
+		</Async>
+	</Appenders>
+	<Loggers>
+		<Logger name="FileLogger" level="error">
+			<AppenderRef ref="ASYNC_File" />
+		</Logger>
+		<Logger name="org.apache.ibatis" level="info" additivity="false">
+			<AppenderRef ref="STDOUT" />
+		</Logger>
+		<Logger name="org.apache.struts2" level="info" additivity="false">
+			<AppenderRef ref="STDOUT" />
+		</Logger>
+		<Logger name="com.sut" level="debug" additivity="false">
+			<AppenderRef ref="STDOUT" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="STDOUT" />
+			<AppenderRef ref="A1" />
+		</Root>
+	</Loggers>
+</configuration>

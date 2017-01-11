@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<!-- exclude 不拦截的pattern -->
+	<constant name="struts.action.excludePattern" value="/ckeditor/.*,/ui/ckfinder/.*"/>
+
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- json return type -->
+		<result-types>
+			<result-type name="json" class="com.sut.web.action.JSONResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="customPaginationInterceptor" class="com.sut.util.pagination.base.interceptor.CustomPaginationInterceptor" />
+			<interceptor name="exceptionInterceptor" class="com.sut.web.struts.interceptors.ExceptionInterceptor" />
+			<interceptor-stack name="appDefaultStack">
+				<interceptor-ref name="defaultStack" />
+				<!-- <interceptor-ref name="defaultStack">
+				</interceptor-ref> -->
+				<!-- custom exception interceptor -->
+				<interceptor-ref name="exceptionInterceptor" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="paginationStack">
+				<interceptor-ref name="appDefaultStack" />
+				<interceptor-ref name="customPaginationInterceptor" />
+			</interceptor-stack>
+			<!-- <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" /> -->
+		</interceptors>
+		
+		<default-interceptor-ref name="appDefaultStack" />
+
+	</package>
+
+	<include file="com/sut/web/action/index/struts-index.xml" />
+	<include file="com/sut/web/action/login/struts-login.xml" />
+	<include file="com/sut/web/action/manage/struts-admin.xml" />
+	<include file="com/sut/web/action/captcha/struts-captcha.xml" />
+	<include file="com/sut/web/action/article/struts-ArticleAction.xml" />
+	<include file="com/sut/web/action/feedback/struts-FeedBackAction.xml" />
+	<include file="com/sut/web/action/friendlink/struts-FriendlinkAction.xml" />
+	<include file="com/sut/web/action/ckfinder/struts-CkfinderAction.xml" />
+	<include file="com/sut/web/action/staff/struts-StaffAction.xml" />
+	<include file="com/sut/web/action/customerServicve/struts-customerServiceAction.xml" />
+	<include file="com/sut/web/action/order/struts-OrderAction.xml" />
+	<include file="com/sut/web/action/contact/struts-contactAction.xml" />
+</struts>

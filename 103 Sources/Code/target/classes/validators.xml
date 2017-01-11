@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+	"-//Apache Struts//XWork Validator Definition 1.0//EN"
+	"http://struts.apache.org./dtds/xwork-validator-definition-1.0.dtd">
+<validators>
+	<validator name="long"  class="com.opensymphony.xwork2.validator.validators.LongRangeFieldValidator" />
+	<validator name="short" class="com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator" />
+	<validator name="double" class="com.opensymphony.xwork2.validator.validators.DoubleRangeFieldValidator" />
+	<validator name="date" class="com.opensymphony.xwork2.validator.validators.DateRangeFieldValidator" />
+	<validator name="expression" class="com.opensymphony.xwork2.validator.validators.ExpressionValidator" />
+	<validator name="fieldexpression" class="com.opensymphony.xwork2.validator.validators.FieldExpressionValidator" />
+	<validator name="email" class="com.opensymphony.xwork2.validator.validators.EmailValidator" />
+	<validator name="url" class="com.opensymphony.xwork2.validator.validators.URLValidator" />
+	<validator name="visitor" class="com.opensymphony.xwork2.validator.validators.VisitorFieldValidator" />
+	<validator name="conversion" class="com.opensymphony.xwork2.validator.validators.ConversionErrorFieldValidator" />
+	<validator name="stringlength" class="com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator" />
+	<validator name="conditionalvisitor" class="com.opensymphony.xwork2.validator.validators.ConditionalVisitorFieldValidator" />
+	
+	<validator name="required" class="com.sut.web.struts.validators.RequiredFieldValidator" />
+	<validator name="requiredstring" class="com.sut.web.struts.validators.RequiredStringValidator" />
+	<validator name="int" class="com.sut.web.struts.validators.IntRangeFieldValidator" />
+	<validator name="stringBytelength" class="com.sut.web.struts.validators.StringByteLengthFieldValidator" />
+	<validator name="regex" class="com.sut.web.struts.validators.RegexFieldValidator" />
+	<validator name="bigDecimal" class="com.sut.web.struts.validators.BigDecimalRangeFieldValidator" />
+	<!-- 自定义验证器 -->
+	<validator name="dateValidator" class="com.sut.web.struts.validators.DateValidator" />
+	<validator name="dateComparison" class="com.sut.web.struts.validators.DateComparison" />
+	<validator name="telePhoneAndMobile" class="com.sut.web.struts.validators.TelephoneAndMobileValidator" />
+	
+	
+</validators>

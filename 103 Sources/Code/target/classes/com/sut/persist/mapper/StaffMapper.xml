@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sut.persist.dao.StaffDao">
+
+	<!-- 定义Staff实体 -->
+	<resultMap type="com.sut.persist.entity.Staff" id="staff">
+		<id property="id" javaType="int" column="staff_id" />
+		<result property="staffName" javaType="String" column="STAFF_NAME" />
+		<result property="imgPath" javaType="String" column="IMG_PATH" />
+		<result property="staffLevel" javaType="com.sut.util.meta.StaffLevelEnum" column="LEVEL"
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" jdbcType="CHAR"/>
+		<result property="birthDate" javaType="java.util.Date" column="BIRTH_DATE" />
+		<result property="address" javaType="String" column="address" />
+		<result property="healthyStatus" javaType="com.sut.util.meta.HealthyStatusEnum" column="HEALTHY_STATUS"
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" jdbcType="CHAR" />
+		<result property="educationLevel" column="education"	typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" /> 
+		<result property="workYears" javaType="integer" column="WORK_YEARS" />
+		<result property="selfIntroduction" javaType="String" column="SELF_INTRODUCTION" />
+		<result property="cert" javaType="String" column="CERT" />
+		<result property="remark" javaType="String" column="REMARK" />
+		<result property="serviceType" javaType="com.sut.util.meta.ServiceTypeEnum" column="SERVICE_TYPE"
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" /> 
+		<result property="mobile" javaType="String" column="MOBILE" />
+		<result property="qqNumber" javaType="String" column="QQ_NUMBER" />
+		<result property="webchatNumber" javaType="String" column="WEBCHAT_NUMBER" />
+		<result property="webchatQrcode" javaType="String" column="WEBCHAT_QRCODE" />	
+	</resultMap>
+
+	<!-- query user by id -->
+	<select id="getById" parameterType="long"  resultMap="staff">
+		select
+			staff_id,
+			staff_name,
+			img_path,
+			level as staffLevel,
+			birth_date,
+			address,
+			healthy_status as healthyStatus,
+			education as educationLevel, 
+			work_years,
+			self_introduction,
+			cert,
+			remark,
+			service_type as serviceType,
+			mobile,
+			qq_number,
+			webchat_number,
+			webchat_qrcode
+		from bbs_staff where staff_id = #{id}
+	</select>
+	
+	<!-- query user by name -->
+	<select id="getByCategory" parameterType="com.sut.util.meta.ServiceTypeEnum" resultMap="staff">
+		select
+			staff_id as id,
+			staff_name as staffName,
+			img_path as imgPath,
+			level as staffLevel,
+			birth_date as birthDate,
+			address as address,
+			healthy_status as healthyStatus,
+			education as education,
+			work_years as workYears,
+			self_introduction as selfIntroduction,
+			cert as cert,
+			remark as remark,
+			service_type as serviceType,
+			mobile as mobile,
+			qq_number as qqNumber,
+			webchat_number as webchatNumber,
+			webchat_qrcode as webchatQrcode
+		from bbs_staff where service_type = #{serviceType, javaType=com.sut.util.meta.ServiceTypeEnum, jdbcType=CHAR, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType}
+	</select>
+
+	<!-- query all user -->	
+	<select id="getAll" resultMap="staff">
+		select
+			staff_id as id,
+			staff_name as staffName,
+			img_path as imgPath,
+			level as staffLevel,
+			birth_date as birthDate,
+			address as address,
+			healthy_status as healthyStatus,
+			education as educationLevel,
+			work_years as workYears,
+			self_introduction as selfIntroduction,
+			cert as cert,
+			remark as remark,
+			service_type as serviceType,
+			mobile as mobile,
+			qq_number as qqNumber,
+			webchat_number as webchatNumber,
+			webchat_qrcode as webchatQrcode
+		from bbs_staff
+	</select>
+	
+	<!-- insert User -->
+	<insert id="insert">
+		insert into bbs_staff(
+			staff_name ,
+			img_path ,
+			level ,
+			birth_date,
+			address,
+			healthy_status,
+			education,
+			work_years,
+			self_introduction,
+			cert,
+			remark,
+			service_type,
+			mobile,
+			qq_number,
+			webchat_number,
+			webchat_qrcode
+		)values(
+			#{staffName},
+			#{imgPath},
+			#{staffLevel, javaType=com.sut.util.meta.ServiceLevelEnum, jdbcType=CHAR,
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			#{birthDate},
+			#{address},
+			#{healthyStatus, javaType=com.sut.util.meta.HealthyStatusEnum, jdbcType=CHAR, 
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			#{educationLevel, javaType=com.sut.util.meta.EducationLevelEnum, jdbcType=CHAR,
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			#{workYears},
+			#{selfIntroduction},
+			#{cert},
+			#{remark},
+			#{serviceType, javaType=com.sut.util.meta.ServiceTypeEnum, jdbcType=CHAR,
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			#{mobile},
+			#{qqNumber},
+			#{webchatNumber},
+			#{webchatQrcode}
+		)
+	</insert>
+	
+	<update id="update">
+		update bbs_staff set 
+			img_path = #{imgPath} ,
+			level = #{staffLevel, javaType=com.sut.util.meta.ServiceLevelEnum, jdbcType=CHAR,
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			#{birthDate},
+			birth_date = #{birthDate},
+			address = #{address},
+			healthy_status = #{healthyStatus, javaType=com.sut.util.meta.HealthyStatusEnum, jdbcType=CHAR,
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			education = #{education, javaType=com.sut.util.meta.EducationLevelEnum, jdbcType=CHAR, 
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			work_years = #{workYears},
+			self_introduction = #{selfIntroduction},
+			cert = #{cert},
+			remark = #{remark},
+			service_type = #{serviceType, javaType=com.sut.util.meta.ServiceTypeEnum, jdbcType=CHAR,
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType},
+			mobile = #{mobile},
+			qq_number = #{qqNumber},
+			webchat_number = #{webchatNumber},
+			webchat_qrcode = #{webchatQrcode}
+		where staff_id = #{id}
+	</update>
+	
+	<delete id="deleteById">
+		delete from bbs_staff
+		where staff_id = #{id}
+	</delete>
+	
+	<delete id="deleteByCategory">
+		delete from bbs_staff
+		where service_type = #{serviceType, javaType=com.sut.util.meta.ServiceTypeEnum, jdbcType=CHAR,
+				typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType}
+	</delete>
+</mapper>

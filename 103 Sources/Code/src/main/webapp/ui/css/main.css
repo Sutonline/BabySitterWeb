@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+/* .maxWidth{
+	width : 100%
+} */
+.ui-error{
+	background-color : #FFE4E1 !important;
+}
+tooltip-view {
+	position : absolute;
+	left : 10px;
+	border-radius : 3px;
+	box-shadow : 1px 1px 4px rgba(0, 0, 0, 0.1);
+	padding : 4px 5px 4px 5px;
+}
+.ui-waitting{
+	background : url("../images/ui-load.gif") no-repeat scroll center center transparent;
+	height : 179px;
+	left : 50%;
+	margin-left : -164px;
+	margin-top: -89px;
+	position: absolute;
+	top: 50%;
+	width: 328px;
+}
+.disHide{
+	display:none;
+}
+.styled-select {
+   background: url("../images/select.png") no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+.select {
+   background: transparent;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+form input.input {
+	width: 268px;
+}
+table.registerForm {
+	
+}
+table.registerForm th {
+	text-align : right;
+	padding : 5px;
+	width : 100px;
+}
+table.registerForm td {
+	text-align : left;
+	padding : 5px;
+	width : 280px;
+}
+.bigImage {
+	width:300px;
+	height:400px;
+	margin-left:50px;
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- Setting -->
+	<settings>
+		<setting name="logImpl" value="LOG4J2"/>
+	</settings>
+	<!-- 命名空间 -->
+	<typeAliases>
+		<typeAlias alias="User" type="com.sut.persist.entity.User" />
+	</typeAliases>
+	
+	<!-- 类型处理器 -->
+	<typeHandlers>
+		<!-- 是否枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.WhetherTypeEnum" jdbcType="CHAR"/>
+		<!-- 性别枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.SexTypeEnum" jdbcType="CHAR" />
+		<!-- 文章类别枚举 -->		
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.ArticleTypeEnum" jdbcType="CHAR" />
+		<!-- 教育级别枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.EducationLevelEnum" jdbcType="CHAR" />
+		<!-- 服务级别枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.ServiceLevelEnum" jdbcType="CHAR" />
+		<!-- 服务类型枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.ServiceTypeEnum" jdbcType="CHAR" />
+		<!-- 职工级别枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.StaffLevelEnum" jdbcType="CHAR" />
+		<!-- 文章状态枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.ArticleStatusEnum" jdbcType="CHAR" />
+		<!-- 健康状况枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.HealthyStatusEnum" jdbcType="CHAR" />
+		<!-- 联系方式枚举 -->
+		<typeHandler handler="com.sut.util.enumerate.mybatis.GenericEnumUserType"
+			javaType="com.sut.util.meta.ContactTypeEnum" jdbcType="CHAR" />
+	</typeHandlers>
+	
+	<!-- 映射map -->
+	<mappers>
+	</mappers>
+</configuration>

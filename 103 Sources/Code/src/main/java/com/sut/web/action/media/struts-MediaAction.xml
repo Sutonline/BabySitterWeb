@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="media" namespace="/media" extends="default">
+		<action name="main" class="mediaAction" method="main">
+			<result name="success">/WEB-INF/pages/media/media_main.jsp</result>
+		</action>
+		
+		<action name="edit" class="mediaAction" method="edit">
+			<result name="success">/WEB-INF/pages/main/media_edit.jsp</result>
+		</action>
+		
+		<action name="add" class="mediaAction" method="add">
+			<result name="success">/WEB-INF/pages/main/media_add.jsp</result>
+		</action>
+	</package>
+</struts>

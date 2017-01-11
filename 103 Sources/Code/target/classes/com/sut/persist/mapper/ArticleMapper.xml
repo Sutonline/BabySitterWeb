@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sut.persist.dao.ArticleDao">
+	<!-- 定义resultMap -->
+	<resultMap type="com.sut.persist.entity.Article" id="article">
+		<id property="id" javaType="int" column="id" />
+		<result property="articleType" javaType="com.sut.util.meta.ArticleTypeEnum" column="article_type" 
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" />
+		<result property="title" javaType="String" column="title" />
+		<result property="author" javaType="String" column="author" />
+		<result property="timeStamp" javaType="java.util.Date" column="timestamp" />
+		<result property="publishTime" javaType="java.util.Date" column="PUBLISH_TIME" />
+		<result property="content" javaType="java.lang.String" column="content" />
+		<result property="remark" javaType="String" column="remark" />
+		<result property="articleStatus" javaType="com.sut.util.meta.ArticleStatusEnum" column="status"
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" />
+		<result property="summary" javaType="String" column="summary" />
+		<result property="thumbnail" javaType="String" column="thumbnail" />
+	</resultMap>
+	
+	<!-- insert Article -->
+	<insert id="insert">
+		insert into bbs_article(
+			article_type,
+			title,
+			author,
+			timestamp,
+			publish_time,
+			content,
+			remark,
+			status,
+			summary,
+			thumbnail
+		) values(
+			#{articleType, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR,
+				 javaType=com.sut.util.meta.ArticleTypeEnum},
+			#{title},
+			#{author},
+			#{timeStamp},
+			#{publishTime},
+			#{content},
+			#{remark},
+			#{articleStatus, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR, 
+				 javaType=com.sut.util.meta.ArticleTypeEnum},
+			#{summary},
+			#{thumbnail}
+		)
+	</insert>
+	
+	<!-- 根据type返回list -->
+	<select id="getByType" parameterType="com.sut.util.meta.ArticleTypeEnum" resultMap="article">
+		select 
+			id,
+			article_type,
+			title,
+			author,
+			timestamp,
+			publish_time,
+			content,
+			remark,
+			status as articleStatus,
+			summary,
+			thumbnail
+		from bbs_article 
+		where article_type = #{articleType, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR,
+				 javaType=com.sut.util.meta.ArticleTypeEnum}
+	</select>
+	
+	<select id="getByTypeAndStatus" resultMap="article">
+		select 
+			id,
+			article_type as articleType,
+			title,
+			author,
+			timestamp,
+			publish_time as publishTime,
+			content,
+			remark,
+			status as articleStatus,
+			summary,
+			thumbnail
+		from bbs_article 
+		where article_type = #{articleType, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR,
+				 javaType=com.sut.util.meta.ArticleTypeEnum} and 
+			  status = #{articleStatus, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR, 
+			  	 javaType=com.sut.util.meta.ArticleStatusEnum}
+	</select>
+		
+	<!-- 查询某个type和某种状态下的文章总数 -->
+	<select id="getCntByTypeAndStatus" resultType="int">
+		select 
+			count(id)
+		from bbs_article 
+		where article_type = #{articleType, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR,
+				 javaType=com.sut.util.meta.ArticleTypeEnum} and 
+			  status = #{status, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, jdbcType=VARCHAR, 
+			  	 javaType=com.sut.util.meta.ArticleStatusEnum}
+	</select>
+	
+	<!-- 根据id更新article(不更新article_type) -->
+	<update id="update">
+		update bbs_article 
+			set title = #{title},
+				author = #{author},
+				publish_time = #{publish_time},
+				content = #{content},
+				remark = #{remark},
+				status = #{articleStatus, typeHandler=com.sut.util.enumerate.mybatis.GenericEnumUserType, 
+					jdbcType=VARCHAR, javaType=com.sut.util.meta.ArticleTypeEnum}
+				summary = #{summary},
+				thumbnail = #{thumbnail}
+			where id = #{id}
+	</update>
+	
+	<!-- 根据id删除 -->
+	<delete id="delete" parameterType="long">
+		delete from bbs_article where id = #{id}
+	</delete>
+	
+	<!-- listAll -->
+	<select id="listAll" resultMap="article">
+		select
+			id,
+			article_type,
+			title,
+			author,
+			timestamp,
+			publish_time,
+			content,
+			remark,
+			status as articleStatus,
+			summary,
+			thumbnail
+		from bbs_article order by id desc
+	</select>
+	
+	<!-- 根据id进行获取 -->
+	<select id="getById" resultMap="article">
+		select
+			id,
+			article_type as articleType,
+			title,
+			author,
+			timestamp,
+			publish_time as publishTime,
+			content,
+			remark,
+			status as articleStatus,
+			summary,
+			thumbnail
+		from bbs_article where id = #{id}
+	</select>
+	
+	<!-- 获取about的页面 -->
+	<select id="getAbout" resultMap="article" >
+		select
+			id,
+			article_type,
+			title,
+			author,
+			timestamp,
+			publish_time,
+			content,
+			remark,
+			status as articleStatus,
+			summary,
+			thumbnail
+		from bbs_article where article_type = '06' and 
+				 status = '02'
+	</select>
+</mapper>

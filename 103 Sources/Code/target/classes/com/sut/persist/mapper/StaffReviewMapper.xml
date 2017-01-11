@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sut.persist.dao.StaffReviewDao">
+
+	<!-- 定义StaffReview实体 -->
+	<resultMap type="com.sut.persist.entity.StaffReview" id="staffReview">
+		<id property="id" javaType="int" column="id" />
+		<result property="staffId" javaType="long" column="STAFF_ID" />
+		<result property="nickName" javaType="String" column="NICK_NAME" />
+		<result property="reviewDate" javaType="java.util.Date" column="review_date" />
+		<result property="remark" javaType="String" column="remark" />
+		<result property="contactType" javaType="com.sut.util.meta.ContactTypeEnum" column="contact_type"
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" />
+		<result property="contactNumber" javaType="String" column="contact_number" />
+		<result property="comment" javaType="String" column="comment" />
+		<result property="reviewStatus" javaType="com.sut.util.meta.ArticleStatusEnum" column="REVIEW_STATUS" 
+			typeHandler="com.sut.util.enumerate.mybatis.GenericEnumUserType" jdbcType="CHAR" />
+		<result property="ipAddress" javaType="String" column="ip_address" />
+	</resultMap>
+
+	<!-- query user by id -->
+	<select id="getById" parameterType="long"  resultMap="staffReview">
+		select
+			id,
+			staff_id,
+			nick_name,
+			review_date,
+			remark,
+			contact_type as contactType,
+			contact_number,
+			comment,
+			review_status as reviewStatus, 
+			ipAddress
+		from bbs_staff_review where id = #{id}
+	</select>
+	
+	<select id="getAll" resultMap="staffReview">
+		select
+			id,
+			staff_id,
+			nick_name,
+			review_date,
+			remark,
+			contact_type as contactType,
+			contact_number,
+			comment,
+			review_status as reviewStatus, 
+			ipAddress
+		from bbs_staff_review
+	</select>
+	
+	<!-- getByUser -->
+	<select id="getByUser" parameterType="long" resultMap="staffReview">
+		select
+			id,
+			staff_id,
+			nick_name,
+			review_date,
+			remark,
+			contact_type as contactType,
+			contact_number,
+			comment,
+			review_status as reviewStatus, 
+			ipAddress
+		from bbs_staff_review where staff_id = #{staffId}
+	</select>
+	
+	<!--  -->
+	<select id="getByStatus" resultMap="staffReview">
+		select
+			id,
+			staff_id,
+			nick_name,
+			review_date,
+			remark,
+			contact_type as contactType,
+			contact_number,
+			comment,
+			review_status as reviewStatus, 
+			ipAddress
+		from bbs_staff_review where review_status = #{reviewStatus, javaType=com.sut.util.meta.ArticleStatusEnum,
+			typeHandler = com.sut.util.enumerate.mybatis.GenericEnumUserType}
+	</select>
+	
+	<update id="updateStatus">
+		update bbs_staff_review set review_status = #{reviewStatus, javaType=com.sut.util.meta.ArticleStatusEnum,
+			typeHandler = com.sut.util.enumerate.mybatis.GenericEnumUserType}
+		where id = #{id} 
+	</update>
+	
+	<delete id="deleteByIpAddress">
+		delete from bbs_staff_review 
+		where review_status = '01' and ip_address in (
+			select * from (select ip_address from bbs_staff_review where review_status = '01'  group by ip_ADDRESS having count(1) > 1) r
+		);
+	</delete>
+	
+	<delete id="deleteById">
+		delete from bbs_staff_review where id = #{id}
+	</delete>
+	
+	<delete id="deleteAll">
+		delete from bbs_staff_review where reviewStatus = #{reviewStatus, javaType=com.sut.util.meta.ArticleStatusEnum,
+			typeHandler = com.sut.util.enumerate.mybatis.GenericEnumUserType}
+	</delete>
+	
+	<delete id="deleteByStaff">
+		delete from bbs_staff_review where staff_id = #{staffId}
+	</delete>
+</mapper>

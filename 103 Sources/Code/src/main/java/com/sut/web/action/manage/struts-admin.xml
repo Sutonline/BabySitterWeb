@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="admin" namespace="/admin" extends="default">
+		<!-- login action -->
+		<action name="login" class="adminAction" method="login">
+			<result name="success">/WEB-INF/pages/login/login.jsp</result>
+		</action>
+		
+		<!-- 提交loginForm进行验证登陆 -->
+		<action name="loginSubmit" class="adminAction" method="loginSubmit">
+			<result name="success" type="redirectAction">\
+				<param name="actionName">index</param>
+			</result>
+			<result name="input">/WEB-INF/pages/login/login.jsp</result>
+		</action>
+		
+		
+		<!-- index action -->
+		<action name="index" class="adminAction" method="index">
+			<result name="success">/WEB-INF/pages/main/index.jsp</result>
+		</action>
+		
+		<!-- index body -->
+		<action name="indexBody" class="adminAction" method="indexBody">
+			<result name="success">/WEB-INF/pages/main/index_body.jsp</result>
+		</action>
+	
+		<!-- login action -->
+		<action name="admin" class="adminAction" method="admin">
+			<result name="success">/WEB-INF/pages/main/admin.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts/XWork Validator 1.0.3//EN"
+	"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<!-- 选择机构不能为空 -->
+	<field name="staff.birthDate">
+		<field-validator type="dateValidator">
+			<message key="date.notValid" />	
+		</field-validator>
+	</field>
+</validators>

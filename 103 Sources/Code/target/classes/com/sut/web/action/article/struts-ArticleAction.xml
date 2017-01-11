@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="article" namespace="/article" extends="default">
+		<action name="listByCategory" class="articleAction" method="listByCategory">
+			<result name="success">/WEB-INF/pages/article/archives.jsp</result>			
+		</action>
+		
+		<action name="edit" class="articleAction" method="edit">
+			<result name="success">/WEB-INF/pages/article/article_edit.jsp</result>
+		</action>
+		
+		<action name="newArticle" class="articleAction" method="newArticle">
+			<result name="success">/WEB-INF/pages/article/article_add.jsp</result>
+			<result name="input">/WEB-INF/pages/article/article_add.jsp</result>
+		</action>
+		
+		<!-- 保存新增 -->
+		<action name="saveArticle" class="articleAction" method="saveArticle">
+			<result name="success">/WEB-INF/pages/article/article_add.jsp</result>		
+			<result name="input">/WEB-INF/pages/article/article_add.jsp</result>		
+		</action>
+		
+		<!-- 获取about article -->
+		<action name="getAboutArticle" class="articleAction" method="getAboutArticle">
+			<result name="success">/WEB-INF/pages/about/about.jsp</result>
+		</action>
+		
+		<!-- news -->
+		<action name="getNews" class="articleAction" method="getNews">
+			<interceptor-ref name="paginationStack" />
+			<result name="success">/WEB-INF/pages/article/article_list_view.jsp</result>
+		</action>
+		
+		<!-- 根据id获取文章详情 -->
+		<action name="getDetail" class="articleAction" method="getDetail">
+			<result name="success">/WEB-INF/pages/article/article_detail.jsp</result>
+		</action>
+		
+	</package>
+</struts>

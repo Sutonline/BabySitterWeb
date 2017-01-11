@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sut.persist.dao.BasicUserDao">
+
+	<!-- 定义User实体 -->
+	<resultMap type="com.sut.persist.entity.User" id="userResult">
+		<id property="username" javaType="String" column="username" />
+		<result property="password" javaType="String" column="password" />
+		<result property="enable" javaType="String" column="enable" />
+	</resultMap>
+
+	<!-- query user by name -->
+	<select id="getUser"  resultType="com.sut.persist.entity.BasicUser">
+		select * from users where username = #{name}
+	</select> 
+
+</mapper>

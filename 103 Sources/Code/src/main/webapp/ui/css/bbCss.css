@@ -1,0 +1,17 @@
+body{ font-size:12px; line-height:18px; color:#5A5A5A; margin:0; padding:0; background-color:#ffffff}
+form{ border:0; padding:0; margin:0;}
+img{ border:0;}
+a{color:#5A5A5A;text-decoration:none}
+a:hover{color:#5A5A5A;text-decoration:underline}
+.nav a{ color:#FFFFFF; font-size:15px; font-weight:bold}
+.smallnav a{ color:#5A5A5A}
+.newslist{width:326px;height:24px; line-height:24px; overflow:hidden; background:url(images/dian.jpg) no-repeat center left; padding-left:26px; margin-left:16px;}
+.list{width:161px;height:190px; float:left; overflow:hidden; display:inline; margin-left:40px; margin-top:16px; line-height:26px;}
+.link{ color:#FFFFFF; font-size:12px}
+.link a{ color:#FFFFFF;font-size:12px}
+.youqing{width:90px; overflow:hidden; float:left; display:inline; margin-left:5px;}
+.item a{ color:#FF59C3}
+.severs a{ color:#FF59BF; font-weight:bold;}
+
+.list3{width:128px;height:197px; float:left; overflow:hidden; display:inline; margin-left:51px; margin-top:6px; line-height:20px;}
+
